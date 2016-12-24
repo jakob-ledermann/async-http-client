@@ -92,9 +92,29 @@ impl HttpResponse {
         self.status >= 400 && self.status < 500
     }
 
-    /// Returns true if this response isisis a 5xx Server Error status code.
+    /// Returns true if this response is a 5xx Server Error status code.
     pub fn is_server_error(&self) -> bool {
         self.status >= 500 && self.status < 600
+    }
+
+    /// Returns a copy of the Response body for reading purposes only.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// let mut res = new_response((1,0), 200, Vec::new());
+    /// let value = String::from("Hello World");
+    /// let bytes = value.as_bytes();
+    /// append(&mut res, bytes);
+    /// let body = res.get_body();
+    /// let actual = body.as_slice();
+    ///
+    /// append(&mut res, bytes);
+    /// assert!(bytes == actual);
+    /// assert!(actual != res.get_body().as_slice());
+    /// ```
+    pub fn get_body(&self) -> Vec<u8> {
+        self.body.clone()
     }
 }
 
@@ -130,4 +150,19 @@ impl fmt::Display for HttpResponse {
         }
         writeln!(f, "...]")
     }
+}
+
+#[test]
+fn get_body_sample(){
+    let mut res = new_response((1,0), 200, Vec::new());
+    let value = String::from("Hello World");
+    let bytes = value.as_bytes();
+    append(&mut res, bytes);
+    let body = res.get_body();
+    let actual = body.as_slice();
+
+    append(&mut res, bytes);
+    assert!(bytes == actual);
+
+    assert!(actual != res.get_body().as_slice());
 }

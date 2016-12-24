@@ -1,16 +1,17 @@
 [package]
 name = "async-http-client"
-version = "0.2.0"
+version = "0.2.1-alpha01"
 description = "Asynchronous HTTP client"
 documentation = "http://matt2xu.github.io/async-http-client/"
 repository = "https://github.com/matt2xu/async-http-client/"
 readme = "README.md"
 license = "MIT"
-authors = ["Matthieu Wipliez <matthieu.wipliez@gmail.com>"]
+authors = ["Matthieu Wipliez <matthieu.wipliez@gmail.com>", "Jakob Ledermann <jakob_ledermann@web.de>"]
 keywords = ["http", "client", "asynchronous", "futures", "tokio"]
 exclude = [
     "docs/*",
-    "tests/*"
+    "tests/*",
+    ".idea/*"
 ]
 
 [dependencies]
